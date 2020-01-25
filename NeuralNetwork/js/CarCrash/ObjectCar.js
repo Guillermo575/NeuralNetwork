@@ -1,8 +1,8 @@
-class Car 
+class Car
 {
-	constructor() 
+	constructor()
 	{
-		this.generation = 0;		
+		this.generation = 0;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
@@ -28,37 +28,29 @@ class Car
 		inputs.push(currentPipe.top / GameScene.height);
 		inputs.push(currentPipe.bottom / GameScene.height);
 		inputs.push(currentPipe.x / GameScene.width);
-		this.yVelocity = 0;			
-		let outputs = this.brain.predict(inputs);	
+		this.yVelocity = 0;
+		let outputs = this.brain.predict(inputs);
 		if (outputs[0] > outputs[1]) 
 			this.Up();
 		else 
 			this.Down();
 	}
-	update() 
+	update()
 	{
 		this.score++;
 		this.y += this.yVelocity;
-		if (this.y > GameScene.height) 
-		{
-			this.y = GameScene.height;
-			this.yVelocity = 0;
-		}
-		if (this.y < 0) 
-		{
-			this.y = 0;
-			this.yVelocity = 0;
-		}
+		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
+		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;
 	}
-	Up() 
+	Up()
 	{
 		this.yVelocity -= this.flyForce;
 	}
-	Down() 
+	Down()
 	{
 		this.yVelocity += this.flyForce;
 	}
-	hitsPipe(pipe) 
+	hitsPipe(pipe)
 	{
 		return (this.y - this.r < pipe.top || this.y + this.r > pipe.bottom) && this.x + this.r > pipe.x && this.x - this.r < pipe.x + pipe.w;
 	}
@@ -75,7 +67,7 @@ function pickOneCar(lstItems)
 	{
 		let index = 0;
 		let r = random(1);
-		while (r > 0) 
+		while (r > 0)
 		{
 			r -= lstItems[index].fitness;
 			index ++;

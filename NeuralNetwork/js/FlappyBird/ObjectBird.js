@@ -1,8 +1,8 @@
-class Bird 
+class Bird
 {
-	constructor() 
+	constructor()
 	{
-		this.generation = 0;		
+		this.generation = 0;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
@@ -14,13 +14,13 @@ class Bird
 		this.fitness = 0;
 		this.brain = new NeuralNetwork(5, 10, 2);
 	}
-	draw() 
+	draw()
 	{
 		noStroke();
 		fill(255, 100);
 		ellipse(this.x, this.y, this.r * 2);
 	}
-	think(pipes) 
+	think(pipes)
 	{
 		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
 		let inputs = [];
@@ -30,31 +30,23 @@ class Bird
 		inputs.push(currentPipe.bottom / GameScene.height);
 		inputs.push(currentPipe.x / GameScene.width);
 		let outputs = this.brain.predict(inputs);
-		if (outputs[0] > outputs[1]) 
+		if (outputs[0] > outputs[1])
 			this.fly();
 	}
-	update() 
+	update()
 	{
 		this.score++;
 		this.yVelocity += this.weight * GameScene.gravity;
 		this.yVelocity *= 0.9;
 		this.y += this.yVelocity;
-		if (this.y > GameScene.height) 
-		{
-			this.y = GameScene.height;
-			this.yVelocity = 0;
-		}
-		if (this.y < 0) 
-		{
-			this.y = 0;
-			this.yVelocity = 0;
-		}
+		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
+		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;
 	}
-	fly() 
+	fly()
 	{
 		this.yVelocity += this.flyForce;
 	}
-	hitsPipe(pipe) 
+	hitsPipe(pipe)
 	{
 		return (this.y - this.r < pipe.top || this.y + this.r > pipe.bottom) && this.x + this.r > pipe.x && this.x - this.r < pipe.x + pipe.w;
 	}
@@ -71,7 +63,7 @@ function pickOneBird(lstItems)
 	{
 		let index = 0;
 		let r = random(1);
-		while (r > 0) 
+		while (r > 0)
 		{
 			r -= lstItems[index].fitness;
 			index ++;
