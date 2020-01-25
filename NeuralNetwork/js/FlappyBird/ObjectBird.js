@@ -9,7 +9,6 @@ class Bird
 		this.r = 15;
 		this.weight = 0.8;
 		this.flyForce = -12;
-		this.highlight = false;
 		this.score = 0;
 		this.fitness = 0;
 		this.brain = new NeuralNetwork(5, 10, 2);
