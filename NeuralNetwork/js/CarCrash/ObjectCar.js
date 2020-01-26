@@ -54,30 +54,3 @@ class Car
 		return (this.y - this.r < pipe.top || this.y + this.r > pipe.bottom) && this.x + this.r > pipe.x && this.x - this.r < pipe.x + pipe.w;
 	}
 }
-function calculateFitness(lstItems)
-{
-	let sum = lstItems.reduce((total, item) => total += item.score, 0);
-	lstItems.forEach ( item => { item.fitness = item.score / sum; } );
-}
-function pickOneCar(lstItems)
-{
-	let newCar = new Car();
-	if(lstItems.length > 0)
-	{
-		let index = 0;
-		let r = random(1);
-		while (r > 0)
-		{
-			r -= lstItems[index].fitness;
-			index ++;
-		}
-		let pickedCar = lstItems[index - 1];
-		pickedCar.brain.mutate(mutate);
-		newCar.brain = pickedCar.brain.copy();
-	}
-	return newCar;
-}
-function mutate(val)
-{
-	return (random(1) < 0.1) ? (val + randomGaussian() * 0.5) : val;
-}

@@ -6,15 +6,15 @@ let generation = 0;
 function StartGame()
 {
 	GameScene = new Scene(width, height);
-	StartNewGeneration();
+	CreateNewGeneration();
 }
-function StartNewGeneration()
+function CreateNewGeneration()
 {
 	generation++;
 	calculateFitness(DeadBirds);
 	for (let i = 0; i < TOTAL_BIRDS; i++)
 	{
-		Birds.push(pickOneBird(DeadBirds));
+		Birds.push(DeadBirds.length == 0 ? new Bird() : pickOneBrain(new Bird(), DeadBirds));
 		Birds[Birds.length - 1].generation = generation;
 	}
 	DeadBirds = [];
@@ -22,7 +22,7 @@ function StartNewGeneration()
 }
 function GameFunction()
 {
-	if (Birds[0].score % 50 === 0) 
+	if (Birds[0].score % 50 === 0)
 		pipes.push(new Pipe());
 	for (let i = 0; i < Birds.length; i++)
 	{
@@ -33,14 +33,14 @@ function GameFunction()
 	for (let i = pipes.length - 1; i >= 0; i--) 
 	{
 		pipes[i].update();
-		if (pipes[i].isOffscreen()) 
+		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
 		for (let j = Birds.length - 1; j >= 0; j--)
 			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].y - Birds[j].r < 0 || Birds[j].y + Birds[j].r > height) 
 				DeadBirds.push(Birds.splice(j, 1)[0]);
 	}
 	if (Birds.length === 0) 
-		StartNewGeneration();	
+		CreateNewGeneration();
 }
 function DrawFunction()
 {

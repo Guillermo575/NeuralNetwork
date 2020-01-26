@@ -50,30 +50,3 @@ class Bird
 		return (this.y - this.r < pipe.top || this.y + this.r > pipe.bottom) && this.x + this.r > pipe.x && this.x - this.r < pipe.x + pipe.w;
 	}
 }
-function calculateFitness(lstItems)
-{
-	let sum = lstItems.reduce((total, item) => total += item.score, 0);
-	lstItems.forEach ( item => { item.fitness = item.score / sum; } );
-}
-function pickOneBird(lstItems)
-{
-	let newBird = new Bird();
-	if(lstItems.length > 0)
-	{
-		let index = 0;
-		let r = random(1);
-		while (r > 0)
-		{
-			r -= lstItems[index].fitness;
-			index ++;
-		}
-		let pickedBird = lstItems[index - 1];
-		pickedBird.brain.mutate(mutate);
-		newBird.brain = pickedBird.brain.copy();
-	}
-	return newBird;
-}
-function mutate(val)
-{
-	return (random(1) < 0.1) ? (val + randomGaussian() * 0.5) : val;
-}

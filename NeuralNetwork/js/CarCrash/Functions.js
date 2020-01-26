@@ -6,15 +6,15 @@ let generation = 0;
 function StartGame()
 {
 	GameScene = new Scene(width, height);
-	StartNewGeneration();
+	CreateNewGeneration();
 }
-function StartNewGeneration()
+function CreateNewGeneration()
 {
 	generation++;
 	calculateFitness(DeadCars);
 	for (let i = 0; i < TOTAL_CarS; i++)
 	{
-		Cars.push(pickOneCar(DeadCars));
+		Cars.push(DeadCars.length == 0 ? new Car() : pickOneBrain(new Car(), DeadCars));
 		Cars[Cars.length - 1].generation = generation;
 	}
 	DeadCars = [];
@@ -30,17 +30,17 @@ function GameFunction()
 		Cars[i].update();
 		EvaluateBestScore(Cars[i]);
 	}
-	for (let i = pipes.length - 1; i >= 0; i--) 
+	for (let i = pipes.length - 1; i >= 0; i--)
 	{
 		pipes[i].update();
-		if (pipes[i].isOffscreen()) 
+		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
 		for (let j = Cars.length - 1; j >= 0; j--)
 			if (Cars[j].hitsPipe(pipes[i]) || Cars[j].y - Cars[j].r < 0 || Cars[j].y + Cars[j].r > height) 
 				DeadCars.push(Cars.splice(j, 1)[0]);
 	}
 	if (Cars.length === 0) 
-		StartNewGeneration();	
+		CreateNewGeneration();
 }
 function DrawFunction()
 {
