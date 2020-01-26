@@ -11,7 +11,7 @@ class Car
 		this.flyForce = 12;
 		this.score = 0;
 		this.fitness = 0;
-		this.brain = new NeuralNetwork(4, 12, 3);
+		this.brain = new NeuralNetwork(4, 12, 2);
 	}
 	draw() 
 	{
@@ -30,9 +30,9 @@ class Car
 		this.yVelocity = 0;
 		let outputs = this.brain.predict(inputs);
 		if (outputs[0] > outputs[1]) 
-			this.Up();
+			this.Move(this.flyForce);
 		else 
-			this.Down();
+			this.Move(-this.flyForce);
 	}
 	update()
 	{
@@ -41,13 +41,9 @@ class Car
 		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
 		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;
 	}
-	Up()
+	Move(Force)
 	{
-		this.yVelocity -= this.flyForce;
-	}
-	Down()
-	{
-		this.yVelocity += this.flyForce;
+		this.yVelocity += Force;
 	}
 	hitsPipe(pipe)
 	{
