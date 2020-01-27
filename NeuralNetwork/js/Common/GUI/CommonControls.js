@@ -1,24 +1,42 @@
 const SCREEN_SIZE = Math.min(600, window.innerWidth);
-let slider; 
-let button;
+let SliderSpeed;
+let PauseButton;
+let SlowButton;
+let FastButton;
 var Pause = false;
 function CreateCommonControls()
 {
-	createCanvas(SCREEN_SIZE, 3 * SCREEN_SIZE / 4);
-	CreateCurrentBoard(SCREEN_SIZE);	
+	createCanvas(SCREEN_SIZE, SCREEN_SIZE * 0.75);
+	CreateCurrentBoard(SCREEN_SIZE);
 	CreateScoreBoard(SCREEN_SIZE);
-	slider = createSlider(1, 1000, 1, 1);
-	button = createButton('Pause');
-    button.mousePressed(PauseResume);
+	SliderSpeed = createSlider(1, 100, 1, 1);
+	SliderSpeed.position(SCREEN_SIZE + (SCREEN_SIZE/2), SCREEN_SIZE * 0.82);
+	SlowButton = createButton('<');
+    SlowButton.mousePressed(SlowGame);
+	SlowButton.position(SCREEN_SIZE + 50, SCREEN_SIZE * 0.82);
+	PauseButton = createButton('Pause');
+    PauseButton.mousePressed(PauseResume);
+	PauseButton.position(SCREEN_SIZE + 100, SCREEN_SIZE * 0.82);
+	FastButton = createButton('>');
+    FastButton.mousePressed(FastGame);
+	FastButton.position(SCREEN_SIZE + 180, SCREEN_SIZE * 0.82);
 }
 function PauseResume()
 {
 	Pause = !Pause; 
-	button.html(Pause ? "Resume" : "Pause");	
+	PauseButton.html(Pause ? "Resume" : "Pause");
+}
+function SlowGame()
+{
+	SliderSpeed.value(1);
+}
+function FastGame()
+{
+	SliderSpeed.value(100);
 }
 function GetSliderSpeed()
 {
-	return slider.value();
+	return SliderSpeed.value();
 }
 function GetPauseState()
 {

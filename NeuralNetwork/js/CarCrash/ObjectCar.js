@@ -11,7 +11,7 @@ class Car
 		this.flyForce = 12;
 		this.score = 0;
 		this.fitness = 0;
-		this.brain = new NeuralNetwork(4, 12, 2);
+		this.brain = new NeuralNetwork(5, 15, 2);
 	}
 	draw() 
 	{
@@ -23,13 +23,14 @@ class Car
 	{
 		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
 		let inputs = [];
+		inputs.push(this.flyForce / 10);
 		inputs.push(this.y / GameScene.height);
 		inputs.push(currentPipe.top / GameScene.height);
 		inputs.push(currentPipe.bottom / GameScene.height);
 		inputs.push(currentPipe.x / GameScene.width);
 		this.yVelocity = 0;
 		let outputs = this.brain.predict(inputs);
-		if (outputs[0] > outputs[1]) 
+		if (outputs[0] > outputs[1])
 			this.Move(this.flyForce);
 		else 
 			this.Move(-this.flyForce);
