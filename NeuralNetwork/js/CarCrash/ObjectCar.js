@@ -58,6 +58,6 @@ class Car
 	}
 	FitnessCriterion()
 	{
-		return this.MovesRealized;
+		return this.MovesRealized + this.score;
 	}
 }
