@@ -1,6 +1,6 @@
-class Pipe 
+class Pipe
 {
-	constructor() 
+	constructor()
 	{
 		this.top = random(GameScene.height/5, 3 * GameScene.height/4);
 		this.gapSize = 90;
@@ -9,17 +9,17 @@ class Pipe
 		this.w = 30;
 		this.speed = -5;
 	}
-	draw() 
+	draw()
 	{
 		fill(255);
 		rect(this.x, 0, this.w, this.top);
 		rect(this.x, this.bottom, this.w, GameScene.height);
 	}
-	update() 
+	update()
 	{
 		this.x += this.speed;
 	}
-	isOffscreen() 
+	isOffscreen()
 	{
 		return this.x < -this.w;
 	}

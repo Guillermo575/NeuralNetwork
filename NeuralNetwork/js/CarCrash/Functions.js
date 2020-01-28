@@ -1,8 +1,9 @@
-const TOTAL_CarS = 300;
+const TOTAL_CARS = 300;
 let pipes = []; 
 let Cars = []; 
 let DeadCars = [];
 let generation = 0;
+let countdown = 0;
 function StartGame()
 {
 	GameScene = new Scene(width, height);
@@ -12,7 +13,7 @@ function CreateNewGeneration()
 {
 	generation++;
 	calculateFitness(DeadCars);
-	for (let i = 0; i < TOTAL_CarS; i++)
+	for (let i = 0; i < TOTAL_CARS; i++)
 	{
 		Cars.push(DeadCars.length == 0 ? new Car() : pickOneBrain(new Car(), DeadCars));
 		Cars[Cars.length - 1].generation = generation;
@@ -21,9 +22,12 @@ function CreateNewGeneration()
 	pipes = [];
 }
 function GameFunction()
-{
-	if (Cars[0].score % 50 === 0) 
+{	
+	if (countdown++ === 50)
+	{
+		countdown = 0;
 		pipes.push(new Pipe());
+	}
 	for (let i = 0; i < Cars.length; i++)
 	{
 		Cars[i].think(pipes);
@@ -36,10 +40,10 @@ function GameFunction()
 		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
 		for (let j = Cars.length - 1; j >= 0; j--)
-			if (Cars[j].hitsPipe(pipes[i]) || Cars[j].y - Cars[j].r < 0 || Cars[j].y + Cars[j].r > height) 
+			if (Cars[j].hitsPipe(pipes[i]) || Cars[j].isOffscreen())
 				DeadCars.push(Cars.splice(j, 1)[0]);
 	}
-	if (Cars.length === 0) 
+	if (Cars.length === 0)
 		CreateNewGeneration();
 }
 function DrawFunction()

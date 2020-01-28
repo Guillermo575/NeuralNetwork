@@ -1,7 +1,7 @@
 function calculateFitness(lstItems)
 {
-	let sum = lstItems.reduce((total, item) => total += item.score, 0);
-	lstItems.forEach ( item => { item.fitness = item.score / sum; } );
+	let sum = lstItems.reduce((total, item) => total += item.FitnessCriterion(), 0);
+	lstItems.forEach ( item => { item.fitness = item.FitnessCriterion() / sum; } );
 }
 function pickOneBrain(Item,lstItems)
 {

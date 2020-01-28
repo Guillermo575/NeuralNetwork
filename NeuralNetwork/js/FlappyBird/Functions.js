@@ -3,6 +3,7 @@ let pipes = [];
 let Birds = []; 
 let DeadBirds = [];
 let generation = 0;
+let countdown = 0;
 function StartGame()
 {
 	GameScene = new Scene(width, height);
@@ -22,8 +23,11 @@ function CreateNewGeneration()
 }
 function GameFunction()
 {
-	if (Birds[0].score % 50 === 0)
+	if (countdown++ === 50)
+	{
+		countdown = 0;
 		pipes.push(new Pipe());
+	}
 	for (let i = 0; i < Birds.length; i++)
 	{
 		Birds[i].think(pipes);
@@ -36,7 +40,7 @@ function GameFunction()
 		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
 		for (let j = Birds.length - 1; j >= 0; j--)
-			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].y - Birds[j].r < 0 || Birds[j].y + Birds[j].r > height) 
+			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].isOffscreen()) 
 				DeadBirds.push(Birds.splice(j, 1)[0]);
 	}
 	if (Birds.length === 0) 
