@@ -19,7 +19,7 @@ function CreateNewGeneration()
 		Cars[Cars.length - 1].generation = generation;
 	}
 	DeadCars = [];
-	pipes = [];
+	pipes = [new Pipe()];
 }
 function GameFunction()
 {	

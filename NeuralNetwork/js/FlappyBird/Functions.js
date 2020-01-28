@@ -19,7 +19,7 @@ function CreateNewGeneration()
 		Birds[Birds.length - 1].generation = generation;
 	}
 	DeadBirds = [];
-	pipes = [];
+	pipes = [new Pipe()];
 }
 function GameFunction()
 {
