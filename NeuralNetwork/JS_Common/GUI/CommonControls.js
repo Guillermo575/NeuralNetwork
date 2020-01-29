@@ -27,7 +27,7 @@ function CreateCommonControls(width, height)
 }
 function PauseResume()
 {
-	Pause = !Pause; 
+	Pause = !Pause;
 	PauseButton.html(Pause ? "Resume" : "Pause");
 }
 function HideShow()

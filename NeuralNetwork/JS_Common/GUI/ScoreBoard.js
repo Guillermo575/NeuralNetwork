@@ -3,7 +3,7 @@
  function CreateScoreBoard(width)
  {
 	ScoreBoard = createGraphics(width, 200);
-	ScoreBoard.show(); 
+	ScoreBoard.show();
  }
 function EvaluateBestScore(item)
 {

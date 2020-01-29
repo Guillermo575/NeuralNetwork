@@ -2,7 +2,7 @@ let CurrentBoard;
 function CreateCurrentBoard(width)
 {
 	CurrentBoard = createGraphics(width, 30);
-	CurrentBoard.show(); 
+	CurrentBoard.show();
 }
 function PrintCurrentBoard(textBoard)
 {

@@ -1,6 +1,6 @@
-class ActivationFunction 
+class ActivationFunction
 {
-	constructor(func, dfunc) 
+	constructor(func, dfunc)
 	{
 		this.func = func;
 		this.dfunc = dfunc;
@@ -8,11 +8,11 @@ class ActivationFunction
 }
 let sigmoid = new ActivationFunction( x => 1 / (1 + Math.exp(-x)), y => y * (1 - y) );
 let tanh = new ActivationFunction( x => Math.tanh(x), y => 1 - y * y );
-class NeuralNetwork 
+class NeuralNetwork
 {
 	constructor(a, b, c)
 	{
-		if (a instanceof NeuralNetwork) 
+		if (a instanceof NeuralNetwork)
 		{
 			this.input_nodes = a.input_nodes;
 			this.hidden_nodes = a.hidden_nodes;
@@ -21,7 +21,7 @@ class NeuralNetwork
 			this.weights_ho = a.weights_ho.copy();
 			this.bias_h = a.bias_h.copy();
 			this.bias_o = a.bias_o.copy();
-		}else 
+		}else
 		{
 			this.input_nodes = a;
 			this.hidden_nodes = b;
@@ -38,7 +38,7 @@ class NeuralNetwork
 		this.learning_rate = 0.1;
 		this.activation_function = sigmoid;
 	}
-	predict(input_array) 
+	predict(input_array)
 	{
 		let inputs = Matrix.fromArray(input_array);
 		let hidden = Matrix.multiply(this.weights_ih, inputs);
@@ -49,7 +49,7 @@ class NeuralNetwork
 		output.map(this.activation_function.func);
 		return output.toArray();
 	}
-	train(input_array, target_array) 
+	train(input_array, target_array)
 	{
 		let inputs = Matrix.fromArray(input_array);
 		let hidden = Matrix.multiply(this.weights_ih, inputs);
@@ -77,13 +77,13 @@ class NeuralNetwork
 		this.weights_ih.add(weight_ih_deltas);
 		this.bias_h.add(hidden_gradient);
 	}
-	serialize() 
+	serialize()
 	{ 
-		return JSON.stringify(this); 
+		return JSON.stringify(this);
 	}
-	static deserialize(data) 
+	static deserialize(data)
 	{
-		data = typeof data == 'string' ? JSON.parse(data) : data;	  
+		data = typeof data == 'string' ? JSON.parse(data) : data;
 		let nn = new NeuralNetwork(data.input_nodes, data.hidden_nodes, data.output_nodes);
 		nn.weights_ih = Matrix.deserialize(data.weights_ih);
 		nn.weights_ho = Matrix.deserialize(data.weights_ho);
@@ -92,11 +92,11 @@ class NeuralNetwork
 		nn.learning_rate = data.learning_rate;
 		return nn;
 	}
-	copy() 
+	copy()
 	{
 		return new NeuralNetwork(this);
 	}
-	mutate(func) 
+	mutate(func)
 	{
 		this.weights_ih.map(func);
 		this.weights_ho.map(func);
