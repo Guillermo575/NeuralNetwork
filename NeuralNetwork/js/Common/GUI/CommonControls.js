@@ -1,4 +1,3 @@
-const SCREEN_SIZE = Math.min(600, window.innerWidth);
 let Canvas;
 let SliderSpeed;
 let PauseButton;
@@ -6,25 +5,25 @@ let SlowButton;
 let FastButton;
 let HideButton;
 var Pause = false;
-function CreateCommonControls()
+function CreateCommonControls(width, height)
 {
-	Canvas = createCanvas(SCREEN_SIZE, SCREEN_SIZE * 0.75);
+	Canvas = createCanvas(width, height);
 	SliderSpeed = createSlider(1, 100, 1, 1);
-	SliderSpeed.position(SCREEN_SIZE + 220, SCREEN_SIZE * 0.82);
+	SliderSpeed.position(width + 220, height + (height * 0.1));
 	SlowButton = createButton('<');
     SlowButton.mousePressed(SlowGame);
-	SlowButton.position(SCREEN_SIZE + 50, SCREEN_SIZE * 0.82);
+	SlowButton.position(width + 50, height + (height * 0.1));
 	PauseButton = createButton('Pause');
     PauseButton.mousePressed(PauseResume);
-	PauseButton.position(SCREEN_SIZE + 100, SCREEN_SIZE * 0.82);
+	PauseButton.position(width + 100, height + (height * 0.1));
 	FastButton = createButton('>');
     FastButton.mousePressed(FastGame);
-	FastButton.position(SCREEN_SIZE + 180, SCREEN_SIZE * 0.82);
+	FastButton.position(width + 180, height + (height * 0.1));
 	HideButton = createButton('Hide');
     HideButton.mousePressed(HideShow);
-	HideButton.position(SCREEN_SIZE + 380, SCREEN_SIZE * 0.82);
-	CreateCurrentBoard(SCREEN_SIZE);
-	CreateScoreBoard(SCREEN_SIZE);
+	HideButton.position(width + 380, height + (height * 0.1));
+	CreateCurrentBoard(width);
+	CreateScoreBoard(width);
 }
 function PauseResume()
 {

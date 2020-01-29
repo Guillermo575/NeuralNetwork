@@ -21,19 +21,16 @@ class Bird
 	}
 	think(pipes)
 	{
-		if(pipes.length > 0)
-		{
-			let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
-			let inputs = [];
-			inputs.push(this.y / GameScene.height);
-			inputs.push(this.yVelocity / 10);
-			inputs.push(currentPipe.top / GameScene.height);
-			inputs.push(currentPipe.bottom / GameScene.height);
-			inputs.push(currentPipe.x / GameScene.width);
-			let outputs = this.brain.predict(inputs);
-			if (outputs[0] > 0.5)
-				this.fly();
-		}
+		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
+		let inputs = [];
+		inputs.push(this.y / GameScene.height);
+		inputs.push(this.yVelocity / 10);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.top / GameScene.height);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.bottom / GameScene.height);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.x / GameScene.width);
+		let outputs = this.brain.predict(inputs);
+		if (outputs[0] > 0.5)
+			this.fly();
 	}
 	update()
 	{

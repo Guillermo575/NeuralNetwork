@@ -21,20 +21,17 @@ class Car
 	}
 	think(pipes)
 	{
-		if(pipes.length > 0)
-		{
-			let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
-			let inputs = [];
-			inputs.push(this.flyForce / 10);
-			inputs.push(this.y / GameScene.height);
-			inputs.push(currentPipe.top / GameScene.height);
-			inputs.push(currentPipe.bottom / GameScene.height);
-			inputs.push(currentPipe.x / GameScene.width);
-			this.yVelocity = 0;
-			let outputs = this.brain.predict(inputs);
-			if(outputs[0] > outputs[1])
-				this.Move(outputs[0] > 0.5 ? this.flyForce : -this.flyForce);
-		}
+		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
+		let inputs = [];
+		inputs.push(this.flyForce / 10);
+		inputs.push(this.y / GameScene.height);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.top / GameScene.height);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.bottom / GameScene.height);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.x / GameScene.width);
+		this.yVelocity = 0;
+		let outputs = this.brain.predict(inputs);
+		if(outputs[0] > outputs[1])
+			this.Move(outputs[0] > 0.5 ? this.flyForce : -this.flyForce);
 	}
 	update()
 	{

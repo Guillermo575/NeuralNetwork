@@ -4,9 +4,12 @@ let Cars = [];
 let DeadCars = [];
 let generation = 0;
 let countdown = 0;
+function SetupGame()
+{
+	CreateCommonControls(Math.min(600, window.innerWidth), Math.min(600, window.innerWidth) * 0.75);
+}
 function StartGame()
 {
-	GameScene = new Scene(width, height);
 	CreateNewGeneration();
 }
 function CreateNewGeneration()
@@ -19,7 +22,7 @@ function CreateNewGeneration()
 		Cars[Cars.length - 1].generation = generation;
 	}
 	DeadCars = [];
-	pipes = [new Pipe()];
+	pipes = [];
 }
 function GameFunction()
 {	
@@ -48,9 +51,7 @@ function GameFunction()
 }
 function DrawFunction()
 {
-	background(50);
 	Cars.forEach(Car => { Car.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Current: " + Cars[0].score.toString().padStart(10, ' ') + ", Generation: " + generation + ", Cars: " + Cars.length + ", Highest: " + BestRecord(), 20, height - 10);
-	PrintScoreBoard();	
+	PrintCurrentBoard("Current: " + Cars[0].score.toString().padStart(10, ' ') + " | Generation: " + generation.toString().padStart(5, ' ') + " | Cars: " + Cars.length.toString().padStart(5, ' ') + " | Highest: " + BestRecord().toString().padStart(20, ' '));
 }

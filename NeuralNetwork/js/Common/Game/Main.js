@@ -1,6 +1,7 @@
 function setup() 
 {
-	CreateCommonControls();
+	SetupGame();
+	GameScene = new Scene(width, height);
 	StartGame();
 }
 function draw()
@@ -11,6 +12,8 @@ function draw()
 		{
 			GameFunction();
 		}
+		background(50);
 		DrawFunction();
+		PrintScoreBoard();
 	}
 }

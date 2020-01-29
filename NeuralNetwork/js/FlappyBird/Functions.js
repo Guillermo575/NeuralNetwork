@@ -4,9 +4,12 @@ let Birds = [];
 let DeadBirds = [];
 let generation = 0;
 let countdown = 0;
+function SetupGame()
+{
+	CreateCommonControls(Math.min(600, window.innerWidth), Math.min(600, window.innerWidth) * 0.75);
+}
 function StartGame()
 {
-	GameScene = new Scene(width, height);
 	CreateNewGeneration();
 }
 function CreateNewGeneration()
@@ -19,7 +22,7 @@ function CreateNewGeneration()
 		Birds[Birds.length - 1].generation = generation;
 	}
 	DeadBirds = [];
-	pipes = [new Pipe()];
+	pipes = [];
 }
 function GameFunction()
 {
@@ -40,7 +43,7 @@ function GameFunction()
 		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
 		for (let j = Birds.length - 1; j >= 0; j--)
-			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].isOffscreen()) 
+			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].isOffscreen())
 				DeadBirds.push(Birds.splice(j, 1)[0]);
 	}
 	if (Birds.length === 0) 
@@ -48,9 +51,7 @@ function GameFunction()
 }
 function DrawFunction()
 {
-	background(50);
 	Birds.forEach(bird => { bird.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Current: " + Birds[0].score.toString().padStart(10, ' ') + ", Generation: " + generation + ", Birds: " + Birds.length + ", Highest: " + BestRecord(), 20, height - 10);
-	PrintScoreBoard();	
+	PrintCurrentBoard("Current: " + Birds[0].score.toString().padStart(10, ' ') + " | Generation: " + generation.toString().padStart(5, ' ') + " | Birds: " + Birds.length.toString().padStart(5, ' ') + " | Highest: " + BestRecord().toString().padStart(20, ' '));
 }
