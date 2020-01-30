@@ -12,9 +12,9 @@ function pickOneBrain(Item,lstItems)
 		r -= lstItems[index].fitness;
 		index ++;
 	}
-	let pickedBird = lstItems[index - 1];
-	pickedBird.brain.mutate(mutate);
-	Item.brain = pickedBird.brain.copy();
+	let pickedItem = lstItems[index - 1];
+	pickedItem.brain.mutate(mutate);
+	Item.brain = pickedItem.brain.copy();
 	return Item;
 }
 function mutate(val)

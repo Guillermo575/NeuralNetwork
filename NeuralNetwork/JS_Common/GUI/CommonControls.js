@@ -22,8 +22,8 @@ function CreateCommonControls(width, height)
 	HideButton = createButton('Hide');
     HideButton.mousePressed(HideShow);
 	HideButton.position(width + 380, height + (height * 0.1));
-	CreateCurrentBoard(width);
-	CreateScoreBoard(width);
+	CreateCurrentBoard(600);
+	CreateScoreBoard(600);
 }
 function PauseResume()
 {
