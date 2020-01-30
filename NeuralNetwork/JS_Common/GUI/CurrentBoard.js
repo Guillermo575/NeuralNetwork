@@ -3,6 +3,7 @@ function CreateCurrentBoard(width)
 {
 	CurrentBoard = createGraphics(width, 40);
 	CurrentBoard.textFont("Lucida Console");
+	CurrentBoard.position(10, 0);
 	CurrentBoard.show();
 }
 function PrintCurrentBoard(Title, Samples, BestRecord)

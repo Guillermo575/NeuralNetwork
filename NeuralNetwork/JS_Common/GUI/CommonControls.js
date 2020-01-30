@@ -8,20 +8,21 @@ var Pause = false;
 function CreateCommonControls(width, height)
 {
 	Canvas = createCanvas(width, height);
-	SliderSpeed = createSlider(1, 100, 1, 1);
-	SliderSpeed.position(width + 220, height + (height * 0.1));
 	SlowButton = createButton('<');
-    SlowButton.mousePressed(SlowGame);
-	SlowButton.position(width + 50, height + (height * 0.1));
 	PauseButton = createButton('Pause');
-    PauseButton.mousePressed(PauseResume);
-	PauseButton.position(width + 100, height + (height * 0.1));
 	FastButton = createButton('>');
-    FastButton.mousePressed(FastGame);
-	FastButton.position(width + 180, height + (height * 0.1));
+	SliderSpeed = createSlider(1, 100, 1, 1);
 	HideButton = createButton('Hide');
+    SlowButton.mousePressed(SlowGame);
+    PauseButton.mousePressed(PauseResume);
+    FastButton.mousePressed(FastGame);
     HideButton.mousePressed(HideShow);
-	HideButton.position(width + 380, height + (height * 0.1));
+	Canvas.position(700, 0);
+	SliderSpeed.position(220, 300);
+	SlowButton.position(50, 300);
+	PauseButton.position(100, 300);
+	FastButton.position(180, 300);
+	HideButton.position(380, 300);
 	CreateCurrentBoard(600);
 	CreateScoreBoard(600);
 }

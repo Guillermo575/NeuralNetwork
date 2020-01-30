@@ -4,6 +4,7 @@
  {
 	ScoreBoard = createGraphics(width, 200);
 	ScoreBoard.textFont("Lucida Console");
+	ScoreBoard.position(10, 50);
 	ScoreBoard.show();
  }
 function EvaluateBestScore(item)
