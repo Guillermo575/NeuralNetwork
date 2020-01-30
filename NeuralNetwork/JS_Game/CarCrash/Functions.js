@@ -10,6 +10,7 @@ function StartGame()
 }
 function CreateNewGeneration()
 {
+	countdown = 0;
 	Generation++;
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)

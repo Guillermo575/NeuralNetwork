@@ -39,7 +39,7 @@ function PrintScoreBoard()
 	{
 		board += (l + 1).toString().padStart(3, '0') + " | ";
 		board += "SCORE: " + BestScore[l].score.toString().padStart(24, ' ') + " | ";
-		board += "ID:" + BestScore[l].Id.toString().padStart(8, ' ') + " | ";
+		board += "ID:" + BestScore[l].id.toString().padStart(8, ' ') + " | ";
 		board += "GEN:" + BestScore[l].generation.toString().padStart(15, ' ') + " | ";
 		board += "\n";
 	}

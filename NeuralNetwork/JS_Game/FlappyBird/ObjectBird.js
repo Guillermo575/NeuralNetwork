@@ -3,7 +3,7 @@ class Bird
 	constructor(Gen, id)
 	{
 		this.generation = Gen;
-		this.Id = id;
+		this.id = id;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
