@@ -1,3 +1,8 @@
+let GameScene;
+let Generation = 0;
+let TotalSamples = 300;
+let Samples = [];
+let DeadSamples = [];
 function setup() 
 {
 	SetupGame();
@@ -12,7 +17,7 @@ function draw()
 		{
 			GameFunction();
 		}
-		background(50);
+		background(0);
 		DrawFunction();
 		PrintScoreBoard();
 	}

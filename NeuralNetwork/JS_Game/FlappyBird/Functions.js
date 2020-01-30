@@ -1,8 +1,4 @@
-const TOTAL_BIRDS = 300;
-let pipes = []; 
-let Birds = []; 
-let DeadBirds = [];
-let generation = 0;
+let pipes = [];
 let countdown = 0;
 function SetupGame()
 {
@@ -14,14 +10,13 @@ function StartGame()
 }
 function CreateNewGeneration()
 {
-	generation++;
-	calculateFitness(DeadBirds);
-	for (let i = 0; i < TOTAL_BIRDS; i++)
+	Generation++;
+	calculateFitness(DeadSamples);
+	for (let i = 0; i < TotalSamples; i++)
 	{
-		Birds.push(DeadBirds.length == 0 ? new Bird() : pickOneBrain(new Bird(), DeadBirds));
-		Birds[Birds.length - 1].generation = generation;
+		Samples.push(DeadSamples.length == 0 ? new Bird(Generation, i) : pickOneBrain(new Bird(Generation, i), DeadSamples));
 	}
-	DeadBirds = [];
+	DeadSamples = [];
 	pipes = [];
 }
 function GameFunction()
@@ -31,27 +26,27 @@ function GameFunction()
 		countdown = 0;
 		pipes.push(new Pipe());
 	}
-	for (let i = 0; i < Birds.length; i++)
+	for (let i = 0; i < Samples.length; i++)
 	{
-		Birds[i].think(pipes);
-		Birds[i].update();
-		EvaluateBestScore(Birds[i]);
+		Samples[i].think(pipes);
+		Samples[i].update();
+		EvaluateBestScore(Samples[i]);
 	}
-	for (let i = pipes.length - 1; i >= 0; i--) 
+	for (let i = pipes.length - 1; i >= 0; i--)
 	{
 		pipes[i].update();
 		if (pipes[i].isOffscreen())
 			pipes.splice(i, 1);
-		for (let j = Birds.length - 1; j >= 0; j--)
-			if (Birds[j].hitsPipe(pipes[i]) || Birds[j].isOffscreen())
-				DeadBirds.push(Birds.splice(j, 1)[0]);
+		for (let j = Samples.length - 1; j >= 0; j--)
+			if (Samples[j].hitsPipe(pipes[i]) || Samples[j].isOffscreen())
+				DeadSamples.push(Samples.splice(j, 1)[0]);
 	}
-	if (Birds.length === 0) 
+	if (Samples.length === 0)
 		CreateNewGeneration();
 }
 function DrawFunction()
 {
-	Birds.forEach(bird => { bird.draw(); });
+	Samples.forEach(bird => { bird.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Current: " + Birds[0].score.toString().padStart(10, ' ') + " | Generation: " + generation.toString().padStart(5, ' ') + " | Birds: " + Birds.length.toString().padStart(5, ' ') + " | Highest: " + BestRecord().toString().padStart(20, ' '));
+	PrintCurrentBoard("Birds", Samples, BestRecord());
 }

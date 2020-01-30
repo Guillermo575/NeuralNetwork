@@ -1,8 +1,9 @@
 class Car
 {
-	constructor()
+	constructor(Gen, id)
 	{
-		this.generation = 0;
+		this.generation = Gen;
+		this.Id = id;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
@@ -55,6 +56,6 @@ class Car
 	}
 	FitnessCriterion()
 	{
-		return this.MovesRealized + this.score;
+		return this.MovesRealized;
 	}
 }

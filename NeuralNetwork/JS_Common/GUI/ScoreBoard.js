@@ -3,6 +3,7 @@
  function CreateScoreBoard(width)
  {
 	ScoreBoard = createGraphics(width, 200);
+	ScoreBoard.textFont("Lucida Console");
 	ScoreBoard.show();
  }
 function EvaluateBestScore(item)
@@ -36,7 +37,11 @@ function PrintScoreBoard()
 	var board = "BEST SCORE: \n\n";
 	for(let l = 0; l < BestScore.length; l++)
 	{
-		board += (l + 1).toString().padStart(2, '0') + ".-         SCORE: " + BestScore[l].score.toString().padStart(30, ' ') + " | GEN:" + BestScore[l].generation.toString().padStart(20, ' ') + "\n";
+		board += (l + 1).toString().padStart(3, '0') + " | ";
+		board += "SCORE: " + BestScore[l].score.toString().padStart(24, ' ') + " | ";
+		board += "ID:" + BestScore[l].Id.toString().padStart(8, ' ') + " | ";
+		board += "GEN:" + BestScore[l].generation.toString().padStart(15, ' ') + " | ";
+		board += "\n";
 	}
 	ScoreBoard.text(board, 20, 20);
 }
