@@ -4,9 +4,9 @@ class Car
 	{
 		this.generation = Gen;
 		this.id = id;
-		this.x = 60;
-		this.y = random(GameScene.height);
-		this.yVelocity = 0;
+		this.x = random(GameScene.width);
+		this.y = GameScene.height - 20;
+		this.xVelocity = 0;
 		this.r = 15;
 		this.flyForce = 12;
 		this.score = 0;
@@ -22,14 +22,14 @@ class Car
 	}
 	think(pipes)
 	{
-		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
+		let currentPipe = pipes.find(pipe => pipe.y - pipe.w < this.y);
 		let inputs = [];
 		inputs.push(this.flyForce / 10);
-		inputs.push(this.y / GameScene.height);
-		inputs.push(currentPipe === undefined ? 0 : currentPipe.top / GameScene.height);
-		inputs.push(currentPipe === undefined ? 0 : currentPipe.bottom / GameScene.height);
-		inputs.push(currentPipe === undefined ? 0 : currentPipe.x / GameScene.width);
-		this.yVelocity = 0;
+		inputs.push(this.x / GameScene.width);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.top / GameScene.width);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.bottom / GameScene.width);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.y / GameScene.height);
+		this.xVelocity = 0;
 		let outputs = this.brain.predict(inputs);
 		if(outputs[0] > outputs[1])
 			this.Move(outputs[0] > 0.5 ? this.flyForce : -this.flyForce);
@@ -37,22 +37,22 @@ class Car
 	update()
 	{
 		this.score++;
-		this.y += this.yVelocity;
-		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
-		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;
+		this.x += this.xVelocity;
+		this.x = this.x > GameScene.width ? GameScene.width : this.x < 0 ? 0 : this.x;
+		this.xVelocity = this.x > GameScene.width && this.x < 0 ? 0 : this.xVelocity;
 	}
 	Move(Force)
 	{
 		this.MovesRealized++;
-		this.yVelocity += Force;
+		this.xVelocity += Force;
 	}
 	hitsPipe(pipe)
 	{
-		return (this.y - this.r < pipe.top || this.y + this.r > pipe.bottom) && this.x + this.r > pipe.x && this.x - this.r < pipe.x + pipe.w;
+		return (this.x - this.r < pipe.top || this.x + this.r > pipe.bottom) && this.y + this.r > pipe.y && this.y - this.r < pipe.y + pipe.w;
 	}
 	isOffscreen()
 	{
-		return this.y - this.r < 0 || this.y + this.r > GameScene.height;
+		return this.x - this.r < 0 || this.x + this.r > GameScene.width;
 	}
 	FitnessCriterion()
 	{

@@ -2,7 +2,7 @@ let pipes = [];
 let countdown = 0;
 function SetupGame()
 {
-	CreateCommonControls(Math.min(600, window.innerWidth), Math.min(600, window.innerWidth) * 0.75);
+	CreateCommonControls(Math.min(600, window.innerWidth) * 0.75, Math.min(600, window.innerWidth));
 }
 function StartGame()
 {
