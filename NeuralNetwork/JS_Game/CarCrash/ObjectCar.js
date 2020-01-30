@@ -26,8 +26,8 @@ class Car
 		let inputs = [];
 		inputs.push(this.flyForce / 10);
 		inputs.push(this.x / GameScene.width);
-		inputs.push(currentPipe === undefined ? 0 : currentPipe.top / GameScene.width);
-		inputs.push(currentPipe === undefined ? 0 : currentPipe.bottom / GameScene.width);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.left / GameScene.width);
+		inputs.push(currentPipe === undefined ? 0 : currentPipe.right / GameScene.width);
 		inputs.push(currentPipe === undefined ? 0 : currentPipe.y / GameScene.height);
 		this.xVelocity = 0;
 		let outputs = this.brain.predict(inputs);
@@ -48,7 +48,7 @@ class Car
 	}
 	hitsPipe(pipe)
 	{
-		return (this.x - this.r < pipe.top || this.x + this.r > pipe.bottom) && this.y + this.r > pipe.y && this.y - this.r < pipe.y + pipe.w;
+		return (this.x - this.r < pipe.left || this.x + this.r > pipe.right) && this.y + this.r > pipe.y && this.y - this.r < pipe.y + pipe.w;
 	}
 	isOffscreen()
 	{

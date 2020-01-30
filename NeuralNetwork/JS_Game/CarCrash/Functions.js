@@ -1,5 +1,6 @@
 let pipes = [];
 let countdown = 0;
+let NextPipe = 0;
 function SetupGame()
 {
 	CreateCommonControls(Math.min(600, window.innerWidth) * 0.75, Math.min(600, window.innerWidth));
@@ -11,6 +12,7 @@ function StartGame()
 function CreateNewGeneration()
 {
 	countdown = 0;
+	NextPipe = random(25, 50);
 	Generation++;
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)
@@ -22,9 +24,10 @@ function CreateNewGeneration()
 }
 function GameFunction()
 {
-	if (countdown++ === 50)
+	if (countdown++ > NextPipe)
 	{
 		countdown = 0;
+		NextPipe = random(25, 50);
 		pipes.push(new Pipe());
 	}
 	for (let i = 0; i < Samples.length; i++)
