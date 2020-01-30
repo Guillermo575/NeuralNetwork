@@ -12,7 +12,7 @@ function StartGame()
 function CreateNewGeneration()
 {
 	countdown = 0;
-	NextPipe = random(25, 50);
+	NextPipe = random(30, 50);
 	Generation++;
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)
@@ -27,7 +27,7 @@ function GameFunction()
 	if (countdown++ > NextPipe)
 	{
 		countdown = 0;
-		NextPipe = random(25, 50);
+		NextPipe = random(30, 50);
 		pipes.push(new Pipe());
 	}
 	for (let i = 0; i < Samples.length; i++)

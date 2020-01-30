@@ -22,7 +22,7 @@ class Car
 	}
 	think(pipes)
 	{
-		let currentPipe = pipes.find(pipe => pipe.x + pipe.w > this.x);
+		let currentPipe = pipes.find(pipe => pipe.x + pipe.w >= this.x - this.r);
 		let inputs = [];
 		inputs.push(this.flyForce / 10);
 		inputs.push(this.y / GameScene.height);

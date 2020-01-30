@@ -2,8 +2,8 @@ class Pipe
 {
 	constructor()
 	{
-		this.gapSize = 90;
-		this.top = random(GameScene.height/5, 3 * GameScene.height/4);
+		this.gapSize = random(70, 90);
+		this.top = random(GameScene.height * 0.1, GameScene.height * 0.8);
 		this.bottom = this.top + this.gapSize;
 		this.x = GameScene.width;
 		this.w = 30;
