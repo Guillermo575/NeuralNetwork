@@ -43,7 +43,7 @@ function GameFunction()
 }
 function DrawFunction()
 {
-	Samples.forEach(bird => { bird.draw(); });
+	Samples.forEach(sample => { sample.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
 	PrintCurrentBoard("Birds", Samples.map(function(v){ return v.brain; }), BestRecord());
 }

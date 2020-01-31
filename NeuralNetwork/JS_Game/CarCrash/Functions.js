@@ -46,7 +46,7 @@ function GameFunction()
 }
 function DrawFunction()
 {
-	Samples.forEach(Car => { Car.draw(); });
+	Samples.forEach(sample => { sample.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
 	PrintCurrentBoard("Cars", Samples.map(function(v){ return v.brain; }), BestRecord());
 }

@@ -46,7 +46,7 @@ function GameFunction()
 }
 function DrawFunction()
 {
-	Samples.forEach(Dinosaur => { Dinosaur.draw(); });
+	Samples.forEach(sample => { sample.draw(); });
 	lstCactus.forEach(Cactus => { Cactus.draw(); });
 	PrintCurrentBoard("Dinosaurs", Samples.map(function(v){ return v.brain; }), BestRecord());
 }
