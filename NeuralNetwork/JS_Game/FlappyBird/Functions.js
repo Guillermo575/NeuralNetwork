@@ -4,10 +4,6 @@ function SetupGame()
 {
 	CreateCommonControls(Math.min(600, window.innerWidth), Math.min(600, window.innerWidth) * 0.75);
 }
-function StartGame()
-{
-	CreateNewGeneration();
-}
 function CreateNewGeneration()
 {
 	countdown = 0;
@@ -31,7 +27,7 @@ function GameFunction()
 	{
 		Samples[i].think(pipes);
 		Samples[i].update();
-		EvaluateBestScore(Samples[i]);
+		EvaluateBestScore(Samples[i].brain);
 	}
 	for (let i = pipes.length - 1; i >= 0; i--)
 	{
@@ -49,5 +45,5 @@ function DrawFunction()
 {
 	Samples.forEach(bird => { bird.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Birds", Samples, BestRecord());
+	PrintCurrentBoard("Birds", Samples.map(function(v){ return v.brain; }), BestRecord());
 }

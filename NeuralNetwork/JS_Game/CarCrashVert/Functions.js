@@ -5,10 +5,6 @@ function SetupGame()
 {
 	CreateCommonControls(Math.min(600, window.innerWidth), Math.min(600, window.innerWidth) * 0.75);
 }
-function StartGame()
-{
-	CreateNewGeneration();
-}
 function CreateNewGeneration()
 {
 	countdown = 0;
@@ -34,7 +30,7 @@ function GameFunction()
 	{
 		Samples[i].think(pipes);
 		Samples[i].update();
-		EvaluateBestScore(Samples[i]);
+		EvaluateBestScore(Samples[i].brain);
 	}
 	for (let i = pipes.length - 1; i >= 0; i--)
 	{
@@ -52,5 +48,5 @@ function DrawFunction()
 {
 	Samples.forEach(Car => { Car.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Cars", Samples, BestRecord());
+	PrintCurrentBoard("Cars", Samples.map(function(v){ return v.brain; }), BestRecord());
 }

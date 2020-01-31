@@ -9,6 +9,10 @@ function setup()
 	GameScene = new Scene(width, height);
 	StartGame();
 }
+function StartGame()
+{
+	CreateNewGeneration();
+}
 function draw()
 {
 	if(!GetPauseState())
