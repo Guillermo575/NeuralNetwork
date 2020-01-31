@@ -2,17 +2,14 @@ class Car
 {
 	constructor(Gen, id)
 	{
-		this.generation = Gen;
-		this.id = id;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
 		this.r = 15;
 		this.flyForce = 12;
-		this.score = 0;
 		this.MovesRealized = 0;
-		this.fitness = 0;
 		this.brain = new NeuralNetwork(5, 10, 2);
+		this.brain.setTagNames(Gen, id, Gen + "_" + id);
 	}
 	draw()
 	{
@@ -36,7 +33,7 @@ class Car
 	}
 	update()
 	{
-		this.score++;
+		this.brain.score++;
 		this.y += this.yVelocity;
 		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
 		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;

@@ -2,17 +2,14 @@ class Bird
 {
 	constructor(Gen, id)
 	{
-		this.generation = Gen;
-		this.id = id;
 		this.x = 60;
 		this.y = random(GameScene.height);
 		this.yVelocity = 0;
 		this.r = 15;
 		this.weight = 0.8;
 		this.flyForce = -12;
-		this.score = 0;
-		this.fitness = 0;
 		this.brain = new NeuralNetwork(5, 10, 1);
+		this.brain.setTagNames(Gen, id, Gen + "_" + id);
 	}
 	draw()
 	{
@@ -35,7 +32,7 @@ class Bird
 	}
 	update()
 	{
-		this.score++;
+		this.brain.score++;
 		this.yVelocity += this.weight * GameScene.gravity;
 		this.yVelocity *= 0.9;
 		this.y += this.yVelocity;
@@ -56,6 +53,6 @@ class Bird
 	}
 	FitnessCriterion()
 	{
-		return this.score;
+		return this.brain.score;
 	}
 }

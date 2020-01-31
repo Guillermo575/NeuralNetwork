@@ -35,8 +35,19 @@ class NeuralNetwork
 			this.bias_h.randomize();
 			this.bias_o.randomize();
 		}
+		this.fitness = 0;
+		this.score = 0;
+		this.generation = 0;
+		this.id = 0;
+		this.name = '';
 		this.learning_rate = 0.1;
 		this.activation_function = sigmoid;
+	}
+	setTagNames(a, b, c)
+	{
+		this.generation = a;
+		this.id = b;
+		this.name = c;
 	}
 	predict(input_array)
 	{
