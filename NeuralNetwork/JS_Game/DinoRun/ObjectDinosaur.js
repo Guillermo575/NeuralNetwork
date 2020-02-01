@@ -5,7 +5,7 @@ class Dinosaur
 		this.x = 60;
 		this.y = GameScene.height;
 		this.yVelocity = 0;
-		this.w = 25;
+		this.w = 50;
 		this.weight = 0.8;
 		this.jumpForce = -40;
 		this.brain = new NeuralNetwork(3, 10, 1);
@@ -15,7 +15,7 @@ class Dinosaur
 	{
 		noStroke();
 		fill(255, 100);
-		rect(this.x, this.y - (this.w * 2), this.w * 2, this.w * 2);
+		rect(this.x, this.y - this.w, this.w, this.w);
 	}
 	think(lstCactus)
 	{
@@ -44,8 +44,8 @@ class Dinosaur
 	}
 	hitsCactus(Cactus)
 	{
-		return (this.x >= Cactus.x && this.x <= Cactus.x + Cactus.w && this.y <= Cactus.y && this.y >= Cactus.y - Cactus.w) ||
-			   (this.x + this.w >= Cactus.x && this.x + this.w <= Cactus.x + Cactus.w && this.y <= Cactus.y && this.y >= Cactus.y - Cactus.w);
+		return ((this.x >= Cactus.x && this.x <= Cactus.x + Cactus.w) || (this.x + (this.w/2) >= Cactus.x && this.x + (this.w/2) <= Cactus.x + Cactus.w) || (this.x + this.w >= Cactus.x && this.x + this.w <= Cactus.x + Cactus.w)) &&
+			   ((this.y <= Cactus.y && this.y >= Cactus.y - Cactus.w) || (this.y - (this.w/2) <= Cactus.y && this.y - (this.w/2) >= Cactus.y - Cactus.w) || (this.y - this.w <= Cactus.y && this.y - this.w >= Cactus.y - Cactus.w));
 	}
 	isOnGround()
 	{

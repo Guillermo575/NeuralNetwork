@@ -36,8 +36,6 @@ class Bird
 		this.yVelocity += this.weight * GameScene.gravity;
 		this.yVelocity *= 0.9;
 		this.y += this.yVelocity;
-		this.y = this.y > GameScene.height ? GameScene.height : this.y < 0 ? 0 : this.y;
-		this.yVelocity = this.y > GameScene.height && this.y < 0 ? 0 : this.yVelocity;
 	}
 	fly()
 	{

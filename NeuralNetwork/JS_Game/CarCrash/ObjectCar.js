@@ -35,8 +35,6 @@ class Car
 	{
 		this.brain.score++;
 		this.x += this.xVelocity;
-		this.x = this.x > GameScene.width ? GameScene.width : this.x < 0 ? 0 : this.x;
-		this.xVelocity = this.x > GameScene.width && this.x < 0 ? 0 : this.xVelocity;
 	}
 	Move(Force)
 	{
