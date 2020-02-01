@@ -23,6 +23,6 @@ function draw()
 		}
 		background(0);
 		DrawFunction();
-		PrintScoreBoard();
+		ScoreBoardPanel.PrintScoreBoard();
 	}
 }

@@ -11,7 +11,9 @@ function CreateNewGeneration()
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)
 	{
-		Samples.push(DeadSamples.length == 0 ? new Bird(Generation, i) : pickOneBrain(new Bird(Generation, i), DeadSamples));
+		let newSample = new Bird(Generation, i);
+		newSample.brain = (DeadSamples.length > 0) ? evolveBrain(newSample.brain, DeadSamples.map(function(v){ return v.brain; })) : newSample.brain;
+		Samples.push(newSample);
 	}
 	DeadSamples = [];
 	pipes = [];
@@ -27,7 +29,7 @@ function GameFunction()
 	{
 		Samples[i].think(pipes);
 		Samples[i].update();
-		EvaluateBestScore(Samples[i].brain);
+		ScoreBoardPanel.EvaluateBestScore(Samples[i].brain);
 	}
 	for (let i = pipes.length - 1; i >= 0; i--)
 	{
@@ -45,5 +47,5 @@ function DrawFunction()
 {
 	Samples.forEach(sample => { sample.draw(); });
 	pipes.forEach(pipe => { pipe.draw(); });
-	PrintCurrentBoard("Birds", Samples.map(function(v){ return v.brain; }), BestRecord());
+	CurrentBoardPanel.PrintCurrentBoard("Birds", Samples.map(function(v){ return v.brain; }), ScoreBoardPanel.BestRecord());
 }

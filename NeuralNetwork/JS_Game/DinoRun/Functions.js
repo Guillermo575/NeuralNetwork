@@ -13,7 +13,9 @@ function CreateNewGeneration()
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)
 	{
-		Samples.push(DeadSamples.length == 0 ? new Dinosaur(Generation, i) : pickOneBrain(new Dinosaur(Generation, i), DeadSamples));
+		let newSample = new Dinosaur(Generation, i);
+		newSample.brain = (DeadSamples.length > 0) ? evolveBrain(newSample.brain, DeadSamples.map(function(v){ return v.brain; })) : newSample.brain;
+		Samples.push(newSample);
 	}
 	DeadSamples = [];
 	lstCactus = [];
@@ -30,7 +32,7 @@ function GameFunction()
 	{
 		Samples[i].think(lstCactus);
 		Samples[i].update();
-		EvaluateBestScore(Samples[i].brain);
+		ScoreBoardPanel.EvaluateBestScore(Samples[i].brain);
 	}
 	for (let i = lstCactus.length - 1; i >= 0; i--)
 	{
@@ -48,5 +50,5 @@ function DrawFunction()
 {
 	Samples.forEach(sample => { sample.draw(); });
 	lstCactus.forEach(Cactus => { Cactus.draw(); });
-	PrintCurrentBoard("Dinosaurs", Samples.map(function(v){ return v.brain; }), BestRecord());
+	CurrentBoardPanel.PrintCurrentBoard("Dinosaurs", Samples.map(function(v){ return v.brain; }), ScoreBoardPanel.BestRecord());
 }
