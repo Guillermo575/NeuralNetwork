@@ -13,6 +13,11 @@ function StartGame()
 {
 	CreateNewGeneration();
 }
+function CreateSample(sample)
+{
+	sample.brain = (DeadSamples.length > 0) ? evolveBrain(sample.brain, DeadSamples.map(function(v){ return v.brain; })) : sample.brain;
+	return sample;
+}
 function draw()
 {
 	if(!GetPauseState())
@@ -24,5 +29,6 @@ function draw()
 		background(0);
 		DrawFunction();
 		ScoreBoardPanel.PrintScoreBoard();
+		CurrentBoardPanel.PrintCurrentBoard("Samples", Samples.map(function(v){ return v.brain; }), ScoreBoardPanel.BestRecord());
 	}
 }

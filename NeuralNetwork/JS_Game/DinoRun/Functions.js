@@ -12,11 +12,7 @@ function CreateNewGeneration()
 	Generation++;
 	calculateFitness(DeadSamples);
 	for (let i = 0; i < TotalSamples; i++)
-	{
-		let newSample = new Dinosaur(Generation, i);
-		newSample.brain = (DeadSamples.length > 0) ? evolveBrain(newSample.brain, DeadSamples.map(function(v){ return v.brain; })) : newSample.brain;
-		Samples.push(newSample);
-	}
+		Samples.push(CreateSample(new Dinosaur(Generation, i)));
 	DeadSamples = [];
 	lstCactus = [];
 }
@@ -50,5 +46,4 @@ function DrawFunction()
 {
 	Samples.forEach(sample => { sample.draw(); });
 	lstCactus.forEach(Cactus => { Cactus.draw(); });
-	CurrentBoardPanel.PrintCurrentBoard("Dinosaurs", Samples.map(function(v){ return v.brain; }), ScoreBoardPanel.BestRecord());
 }
