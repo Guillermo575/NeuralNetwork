@@ -3,7 +3,7 @@ let Generation = 0;
 let TotalSamples = 300;
 let Samples = [];
 let DeadSamples = [];
-function setup() 
+function setup()
 {
 	SetupGame();
 	GameScene = new Scene(width, height);
@@ -22,7 +22,7 @@ function draw()
 {
 	if(!GetPauseState())
 	{
-		for (let i = 0; i < GetSliderSpeed(); i++) 
+		for (let i = 0; i < GetSliderSpeed(); i++)
 		{
 			GameFunction();
 		}
