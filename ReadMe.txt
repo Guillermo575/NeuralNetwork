@@ -1,0 +1,12 @@
+Lib description:
+->JS_COMMON:
+	-> GUI: common libs that control the interface like the current board, highscore, user buttons, etc.
+	-> AI: Artificial inteligence that manage the sample brains
+	-> P5: P5.js libs that generates and controls the graphics, you can download here: https://p5js.org/
+-JS_GAME:
+	-> MAIN.JS && SCENE.JS: libs that control the common functions.
+	-> FlappyBird: based in this code: https://codepen.io/FlorinPop17/pen/OZXrJG, the bots decide wif fly or not.
+	-> CarCrash: similar to flappy bird but with horizontal movement, the bots decide if move left, right or not move
+	-> CarCrashVert: similar to car crash but with vertical movement, the bots decide if move up, down or not move.
+	-> DinoRun: Based on the "no internet game" of chrome, the bots decide when need to jump.
+	-> Snake: based in this code: https://p5js.org/examples/interaction-snake-game.html.
