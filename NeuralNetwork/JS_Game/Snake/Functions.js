@@ -2,8 +2,8 @@ let Preys = [];
 let TotalPreys = 3;
 function SetupGame()
 {
-	TotalSamples = 10;
-	CreateCommonControls(Math.min(300, window.innerWidth), Math.min(300, window.innerWidth));
+	TotalSamples = 300;
+	CreateCommonControls(Math.min(500, window.innerWidth), Math.min(500, window.innerWidth));
 }
 function CreateNewGeneration()
 {
@@ -32,7 +32,7 @@ function GameFunction()
 				Preys.push(new Prey());
 			}
 		}
-		if(Samples[i].checkSnakeCollision() || Samples[i].isOffscreen())
+		if(Samples[i].checkSnakeCollision() || Samples[i].isOffscreen() || Samples[i].stamina == 0)
 			DeadSamples.push(Samples.splice(i, 1)[0]);
 	}
 	if (Samples.length === 0)
