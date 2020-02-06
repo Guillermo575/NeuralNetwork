@@ -12,7 +12,12 @@ class CurrentBoard
 		this.Panel.fill(255);
 		this.Panel.rect(0, 0, this.Panel.width - 1, this.Panel.height - 1);
 		this.Panel.fill(0);
-		let Board = "Current:" + Samples[0].score.toString().padStart(30, ' ') + " | ";
+		let BestCurrentScore = Samples[0].score;
+		for(let i = 0; i < Samples.length; i++)
+		{
+			BestCurrentScore = Samples[i].score > BestCurrentScore ? Samples[i].score : BestCurrentScore;
+		}
+		let Board = "Current:" + BestCurrentScore.toString().padStart(30, ' ') + " | ";
 		Board += (Title +":").padEnd(11, ' ') + Samples.length.toString().padStart(25, ' ') + "\n";
 		Board += "Highest:" + BestRecord.toString().padStart(30, ' ') + " | ";
 		Board += "Generation:" + Samples[0].generation.toString().padStart(25, ' ') + "\n";
