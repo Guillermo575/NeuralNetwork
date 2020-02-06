@@ -8,7 +8,7 @@ function evolveBrain(Item, lstItems)
 	let index = 0;
 	let r = random(1);
 	let genItem = Item.generation;
-	let idItem = Item.generation;
+	let idItem = Item.id;
 	while (r > 0)
 	{
 		r -= lstItems[index].fitness;
