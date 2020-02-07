@@ -35,6 +35,7 @@ class NeuralNetwork
 			this.bias_h.randomize();
 			this.bias_o.randomize();
 		}
+		this.CreationDate = new Date();
 		this.fitness = 0;
 		this.score = 0;
 		this.generation = 0;

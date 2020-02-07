@@ -9,6 +9,7 @@ function evolveBrain(Item, lstItems)
 	let r = random(1);
 	let genItem = Item.generation;
 	let idItem = Item.id;
+	let nameItem = Item.name;
 	while (r > 0)
 	{
 		r -= lstItems[index].fitness;
@@ -17,7 +18,7 @@ function evolveBrain(Item, lstItems)
 	let pickedItem = lstItems[index - 1];
 	pickedItem.mutate(mutate);
 	Item = pickedItem.copy();
-	Item.setTagNames(genItem, idItem, genItem + "_" + idItem);
+	Item.setTagNames(genItem, idItem, nameItem);
 	return Item;
 }
 function mutate(val)
