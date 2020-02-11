@@ -142,8 +142,8 @@ class Snake
 	}
 	checkSnakeEat(Prey)
 	{
-		return this.snakeHeadX > (Prey.x - Prey.size/2) && this.snakeHeadX < (Prey.x + Prey.size/2) &&
-			   this.snakeHeadY > (Prey.y - Prey.size/2) && this.snakeHeadY < (Prey.y + Prey.size/2);
+		return this.snakeHeadX >= (Prey.x - Prey.size/2) && this.snakeHeadX <= (Prey.x + Prey.size/2) &&
+			   this.snakeHeadY >= (Prey.y - Prey.size/2) && this.snakeHeadY <= (Prey.y + Prey.size/2);
 	}
 	growSnake(Prey)
 	{
